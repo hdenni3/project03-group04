@@ -1,155 +1,36 @@
-import sqlalchemy
-# from sqlalchemy.ext.automap import automap_base
-# from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, text, func
-import datetime
-
+from sqlalchemy import create_engine, text
+from sqlalchemy.ext.automap import automap_base
+from sqlalchemy.orm import Session
 import pandas as pd
 import numpy as np
 
-# The Purpose of this Class is to separate out any Database logic
-class SQLHelper():
-    #################################################
-    # Database Setup
-    #################################################
+class SQLHelper:
+    def __init__(self, database_url='sqlite:///Youtubedata.sqlite'):
+        # Create an engine
+        self.engine = create_engine(database_url)
+        # Initialize base for ORM
+        self.Base = automap_base()
+        self.Base.prepare(self.engine, reflect=True)
+        # Set up a session
+        self.session = Session(self.engine)
 
-    # define properties
-    def __init__(self):
-        self.engine = create_engine("sqlite:///data.db")
-        # self.Base = None
+    def get_data_from_db(self, param):
+        # Use SQLAlchemy to create a query
+        query = text("SELECT title, video_views FROM my_table WHERE category = :category")
+        with self.engine.connect() as conn:
+            result = conn.execute(query, {'category': param})
+            data = result.fetchall()
+        return data
 
-        # automap Base classes
-        # self.init_base()
-
-    # COMMENT BACK IN IF USING THE ORM
-
-    # def init_base(self):
-    #     # reflect an existing database into a new model
-    #     self.Base = automap_base()
-    #     # reflect the tables
-    #     self.Base.prepare(autoload_with=self.engine)
-
-    #################################################
-    # Database Queries
-    #################################################
-
-    # USING RAW SQL
-    def get_bar(self, min_attempts, region):
-
-        # switch on user_region
-        if region == 'All':
-            where_clause = "and 1=1"
-        else:
-            where_clause = f"and region = '{region}'"
-
-        # build the query
-        query = f"""
-            SELECT
-                name,
-                full_name,
-                region,
-                launch_attempts,
-                launch_successes
-            FROM
-                launchpads
-            WHERE
-                launch_attempts >= {min_attempts}
-                {where_clause}
-            ORDER BY
-                launch_attempts DESC;
-        """
-
-        df = pd.read_sql(text(query), con = self.engine)
-        data = df.to_dict(orient="records")
-        return(data)
-
-    def get_pie(self, min_attempts, region):
-
-        # switch on user_region
-        if region == 'All':
-            where_clause = "and 1=1"
-        else:
-            where_clause = f"and region = '{region}'"
-
-        # build the query
-        query = f"""
-            SELECT
-                name,
-                region,
-                launch_attempts
-            FROM
-                launchpads
-            WHERE
-                launch_attempts >= {min_attempts}
-                {where_clause}
-            ORDER BY
-                launch_attempts DESC;
-        """
-
-        df = pd.read_sql(text(query), con = self.engine)
-        data = df.to_dict(orient="records")
-        return(data)
-
-    def get_table(self, min_attempts, region):
-
-        # switch on user_region
-        if region == 'All':
-            where_clause = "and 1=1"
-        else:
-            where_clause = f"and region = '{region}'"
-
-        # build the query
-        query = f"""
-            SELECT
-                name,
-                full_name,
-                region,
-                latitude,
-                longitude,
-                launch_attempts,
-                launch_successes,
-                launch_attempts - launch_successes as launch_failures
-            FROM
-                launchpads
-            WHERE
-                launch_attempts >= {min_attempts}
-                {where_clause}
-            ORDER BY
-                launch_attempts DESC;
-        """
-
-        df = pd.read_sql(text(query), con = self.engine)
-        data = df.to_dict(orient="records")
-        return(data)
-
-    def get_map(self, min_attempts, region):
-
-        # switch on user_region
-        if region == 'All':
-            where_clause = "and 1=1"
-        else:
-            where_clause = f"and region = '{region}'"
-
-        # build the query
-        query = f"""
-            SELECT
-                name,
-                full_name,
-                region,
-                latitude,
-                longitude,
-                launch_attempts,
-                launch_successes,
-                launch_attempts - launch_successes as launch_failures
-            FROM
-                launchpads
-            WHERE
-                launch_attempts >= {min_attempts}
-                {where_clause}
-            ORDER BY
-                launch_attempts DESC;
-        """
-
-        df = pd.read_sql(text(query), con = self.engine)
-        data = df.to_dict(orient="records")
-        return(data)
+    def get_top_subscribers(self):
+        # Example of a more complex query
+        query = text("""
+            SELECT Rank, Youtuber, subscribers, country, channel_type
+            FROM my_table
+            ORDER BY subscribers DESC
+            LIMIT 25
+        """)
+        with self.engine.connect() as conn:
+            result = conn.execute(query)
+            data = result.fetchall()
+        return data
