@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our YouTube Data Project</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('map') }}">Map</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('works_cited') }}">Works Cited</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Introduction</h2>
+            <p>This project provides an in-depth analysis of global YouTube statistics, focusing on growth trends, earnings, geographic insights, and more. Explore the dashboard and interactive map to discover how YouTube channels perform across different regions and categories.</p>
+        </section>
+
+        <section>
+            <h2>Project Highlights</h2>
+            <ul>
+                <li>Analyze the top YouTube channels by subscribers and views.</li>
+                <li>Explore estimated earnings for the top channels.</li>
+                <li>Compare YouTube channel performance across different countries.</li>
+                <li>Visualize geographic distribution and trends with an interactive map.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Project Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>

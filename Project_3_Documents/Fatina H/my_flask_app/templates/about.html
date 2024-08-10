@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>About Our Project</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+            <li><a href="{{ url_for('map') }}">Map</a></li>
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="{{ url_for('works_cited') }}">Works Cited</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>About the Project</h2>
+            <p>This project was created to analyze YouTube data and present insights through interactive visualizations. Our goal is to explore the growth, trends, earnings, and geographic distribution of popular YouTube channels.</p>
+        </section>
+
+        <section>
+            <h2>Meet the Team</h2>
+            <p>Our team consists of passionate data enthusiasts who have collaborated to build this project. We bring together skills in data analysis, software development, and data visualization.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Your Project Name. All rights reserved.</p>
+    </footer>
+</body>
+</html>
