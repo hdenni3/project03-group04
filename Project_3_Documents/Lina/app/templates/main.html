@@ -12,17 +12,14 @@
  <link href="https://bootswatch.com/5/darkly/bootstrap.min.css", rel="stylesheet">
  <link href="./static/css/static.css" rel="stylesheet">
 
-  
-
-    <style>
+      <style>
         body {
-
-            background-color: white;
-            color: black;
+            background-color:#003366;
+            color: white;
         }
 
         .navbar {
-            background-color:#FF8E00;
+            background-color: #FF8E00;
         }
 
         .navbar-brand {
@@ -30,53 +27,22 @@
         }
 
         .nav-link {
-            color: white;
+            color: #FD7702; /* Orange */
         }
 
-        h1 {
-            color:whitesmoke
+        .h1 {
+            color: whitesmoke;
         }
 
         .dashboard-section {
-            background-color: #002347;
+            background-color: #003f70;
             color: white;
             padding: 20px;
             margin-top: 20px;
             border-radius: 10px;
         }
 
-        /* New Color Styles */
-        .dark-blue {
-            color: #002347; /* Dark Blue */
-        }
 
-        .navy-blue {
-            color: #003366; /* Navy Blue */
-        }
-
-        .royal-blue {
-            color: #003F7D; /* Royal Blue */
-        }
-
-        .orange {
-            color: #FF8E00; /* Orange */
-        }
-
-        .orange-2 {
-            color: #FD7702; /* Orange */
-        }
-
-        .orange-3 {
-            color: #FF5003; /* Orange */
-        }
-
-        .white {
-            color: #FFFFFF; /* White */
-        }
-
-        .black {
-            color: #000000; /* Black */
-        }
     </style>
 
     <!-- JS IMPORTS - External Libraries -->
@@ -103,7 +69,7 @@
                     <a class="nav-link" href="/map">Map</a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link active" href="/about_us">About Us</a>
+                <a class="nav-link" href="/about_us">About Us</a>
                 </li>
             </ul>
         </div>
@@ -137,6 +103,6 @@
         <!-- Add more options as needed -->
     </select>
     <div id="chart"></div>
-    <a href="{{ url_for('dasboard') }}">Go to Dasboard Page</a>
+    <a href="{{ url_for('dashboard') }}">Go to Dashboard Page</a>
 </body>
 </html>
