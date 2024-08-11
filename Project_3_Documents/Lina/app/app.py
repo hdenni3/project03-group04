@@ -22,28 +22,37 @@ def main():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
     form_country = request.form.get('country', 'All')
-
-    try:
-        # Fetch data using SQLHelper
-        most_subs_channels_by_country = sqlHelper.get_most_subs_channels_by_country(form_country)
-        top_channels_by_subscribers = sqlHelper.get_top_channels_by_subscribers(form_country)
-        
-        # Prepare data for the template
-        data = {
-            'most_subs_channels_by_country': most_subs_channels_by_country,
-            'top_channels_by_subscribers': top_channels_by_subscribers,
-        }
-        
-        return render_template('dashboard.html', data=data)
+ 
+    countries = sqlHelper.get_countries()
+    top_channels = sqlHelper.get_top_channels()
+    top_channels_by_country = sqlHelper.get_top_channels(form_country)
+ 
+    data = {
+        'countries': countries,
+        'top_channels': top_channels,
+        'top_channels_by_country': top_channels_by_country
+    }
     
-    except Exception as e:
-        # Handle errors gracefully
-        return render_template('dashboard.html', data={}, error=str(e))
+    return render_template('dashboard.html', data=data)
 
 # Map page route
 @app.route('/map')
 def map_view():
-    return render_template('map.html')
+    countries = sqlHelper.get_countries()
+    categories = sqlHelper.get_categories()
+    
+    data = {
+        'countries': countries,
+        'categories': categories
+    }
+    
+    return render_template('map.html', data=data)
+
+@app.route("/api/v1.0/get_map/<string:category>/<string:country>")
+def get_map(category, country):
+    map_data = sqlHelper.get_map(category, country)
+    return jsonify(map_data)
+
 
 # About page route
 @app.route('/about_us')
