@@ -76,7 +76,7 @@
                 <select id="category_filter">
                     <option selected>All</option>
                     {% for row in data['categories'] %}
-                    <option>{{ row['category'] }}</option>
+                    <option>{{ row.category }}</option>
                     {% endfor %}
                 </select>
 
@@ -84,7 +84,7 @@
                 <select id="country_filter">
                     <option selected>All</option>
                     {% for row in data['countries'] %}
-                    <option value="{{ row.country }}">{{ row.country }}</option>
+                    <option>{{ row.country }}</option>
                     {% endfor %}
                 </select>
 
