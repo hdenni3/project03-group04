@@ -129,7 +129,8 @@ th {
                         Top 25 YouTube Channels by Subscribers
                     </div>
                     <div class="card-body">
-                        <table>
+                        <div id="top-channels"></div>
+                        <table id="top-channels-table">
                             <thead>
                                 <tr>
                                     <th>Youtuber</th>
@@ -161,13 +162,14 @@ th {
                     </div>
                     <div class="card-body">
                         <select id="countryDropdown" class="form-select">
-                            <option value="">Select a Country</option>
+                            <option selected>All</option>
                             {% for row in data['countries'] %}
-                                <option value="{{ row.country }}">{{ row.country }}</option>
+                            <option>{{ row.country }}</option>
                             {% endfor %}
                         </select>
 
-                        <table id="countryTable">
+                        <div id="top-channels-by-country"></div>
+                        <table id="top-channels-by-country-table">
                             <thead>
                                 <tr>
                                     <th>Youtuber</th>
@@ -212,7 +214,10 @@ th {
     </div>
 
     <!-- JavaScript -->
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>var top_channels = {{ data.top_channels | tojson }}</script>
+    <script>var top_channels_by_country = {{ data.top_channels_by_country | tojson }}</script>
+    // <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src='https://cdn.plot.ly/plotly-2.34.0.min.js'></script>
     <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 </body>
 </html>

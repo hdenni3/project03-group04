@@ -11,8 +11,8 @@ class SQLHelper:
 
     def get_map(self, category, country):
         """Retrieve map data based on category and country."""
-        category_clause = "1=1" if category == 'All' else f"category = '{category}'"
-        country_clause = "1=1" if country == 'All' else f"country = '{country}'"
+        category_clause = "1 = 1" if category == 'All' else f"category = '{category}'"
+        country_clause = "1 = 1" if country == 'All' else f"country = '{country}'"
         
         query = f"""
             SELECT youtuber, channel_type, subscribers, latitude, longitude
@@ -24,7 +24,7 @@ class SQLHelper:
 
     def get_top_channels(self, country="All"):
         """Retrieve the most subscribed channels by country."""
-        where_clause = "1=1" if country == 'All' else f"country = '{country}'"
+        where_clause = "1 = 1" if country == 'All' else f"country = '{country}'"
         
         query = f"""
             SELECT youtuber, subscribers, country, channel_type, category, video_views
