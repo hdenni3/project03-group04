@@ -15,56 +15,41 @@ class SQLHelper:
     # Database Queries
     #################################################
 
-    def get_top_channels_by_subscribers(self, country="All"):
-        """
-        Retrieves the top 25 YouTube channels by subscribers, optionally filtered by country.
-        :param country: Optional country to filter the results.
-        :return: List of dictionaries with the query results.
-        """
-        # Build the WHERE clause
-        if country == 'All':
-            where_clause = "1=1"
-        else:
-            where_clause = f"country = '{country}'"
+    def get_map(self, category, country):
+        """Retrieve map data based on category and country."""
+        category_clause = "1=1" if category == 'All' else f"category = '{category}'"
+        country_clause = "1=1" if country == 'All' else f"country = '{country}'"
 
-        # Define the query
         query = f"""
-        SELECT Rank, Youtuber, subscribers, country, channel_type
-        FROM my_table
-        WHERE {where_clause}
-        ORDER BY subscribers DESC
-        LIMIT 25
-        """
-
-        # Execute the query and fetch results into a DataFrame
+            SELECT youtuber, channel_type, subscribers, latitude, longitude
+            FROM my_table
+            WHERE {category_clause} AND {country_clause}
+            """
         df = pd.read_sql(text(query), con=self.engine)
-        # Convert DataFrame to a list of dictionaries
-        data = df.to_dict(orient="records")
-        return data
+        return df.to_dict(orient="records")
 
-    def get_most_subs_channels_by_country(self, country="All"):
-        """
-        Retrieves the top 25 YouTube channels by subscribers, optionally filtered by country.
-        :param country: Optional country to filter the results.
-        :return: List of dictionaries with the query results.
-        """
-        # Build the WHERE clause
-        if country == 'All':
-            where_clause = "1=1"
-        else:
-            where_clause = f"country = '{country}'"
-
-        # Define the query
+    def get_top_channels(self, country="All"):
+        """Retrieve the most subscribed channels by country."""
+        where_clause = "1=1" if country == 'All' else f"country = '{country}'"
+        
         query = f"""
-        SELECT Rank, Youtuber, subscribers, country, channel_type
-        FROM my_table
-        WHERE {where_clause}
-        ORDER BY subscribers DESC
-        LIMIT 25
+            SELECT youtuber, subscribers, country, channel_type, category, video_views
+            FROM my_table
+            WHERE {where_clause}
+            ORDER BY subscribers DESC
+            LIMIT 25
         """
-
-        # Execute the query and fetch results into a DataFrame
         df = pd.read_sql(text(query), con=self.engine)
-        # Convert DataFrame to a list of dictionaries
-        data = df.to_dict(orient="records")
-        return data
+        return df.to_dict(orient="records")
+
+    def get_countries(self):
+        """Retrieve a list of distinct countries."""
+        query = "SELECT DISTINCT country FROM my_table ORDER BY country"
+        df = pd.read_sql(text(query), con=self.engine)
+        return df['country'].tolist()
+
+    def get_categories(self):
+        """Retrieve a list of distinct categories."""
+        query = "SELECT DISTINCT category FROM my_table"
+        df = pd.read_sql(text(query), con=self.engine)
+        return df['category'].tolist()

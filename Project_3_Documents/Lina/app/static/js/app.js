@@ -57,7 +57,6 @@ function make_table(filtered_data) {
   filtered_data.forEach(channel => {
     const row = `
       <tr>
-        <td>${channel.Rank}</td>
         <td>${channel.Youtuber}</td>
         <td>${channel.subscribers}</td>
         <td>${channel.country}</td>
