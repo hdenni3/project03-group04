@@ -29,7 +29,7 @@ function createMap(data) {
 
     // make marker
     let marker = L.marker(point);
-    let popup = `<h1>${row.full_name}</h1><hr><h2>${row.region}</h2><hr><h3>${row.launch_attempts} | ${row.launch_successes}</h3>`;
+    let popup = `<h1 class="youtuber">${row.youtuber}</h1><hr><h2 class="channel_type">${row.channel_type}</h2><hr><h3>Subscribers: ${Math.round(row.subscribers / 1000000)}M</h3>`;
     marker.bindPopup(popup);
     markers.addLayer(marker);
 
@@ -78,12 +78,11 @@ function createMap(data) {
 
 function do_work() {
   // extract user input
-  let min_launches = d3.select("#launch_filter").property("value");
-  min_launches = parseInt(min_launches);
-  let region = d3.select("#region_filter").property("value");
+  let category = d3.select("#category_filter").property("value");
+  let country = d3.select("#country_filter").property("value");
 
   // We need to make a request to the API
-  let url = `/api/v1.0/get_map/${min_launches}/${region}`;
+  let url = `/api/v1.0/get_map/${category}/${country}`;
 
   // make TWO requests
   d3.json(url).then(function (data) {
