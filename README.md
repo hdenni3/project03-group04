@@ -1,5 +1,8 @@
 Global YouTube Statistics 2023
+
+
 Overview
+        
         Key measures including subscribers, video views, categories, and revenue are the subject of this all-encompassing study of YouTube success on a worldwide scale. The project's overarching goal is to highlight successful YouTube channels and to track global trends in the popularity of various types of video. By using a data-driven approach, we investigate how demographics relate to the number of popular YouTube channels by nation, shedding light on what makes YouTube so popular throughout the globe. The project's interactive visualizations and dashboards are powered by a full-stack data application that utilizes Flask, SQLite, and a variety of front-end technologies.
 
 Technology Used
