@@ -93,22 +93,17 @@ Bootswatch. (n.d.). Bootswatch Themes. Retrieved from https://bootswatch.com/
 Highcharts.js
 Highcharts. (n.d.). Highcharts JavaScript Charting Library. Retrieved from https://www.highcharts.com/
 
-Charts.js
-Charts.js. (n.d.). Charts.js Documentation. Retrieved from https://www.chartjs.org/
+Charts.js. (n.d.). 
+Charts.js Documentation. Retrieved from https://www.chartjs.org/
 
-D3.js
-D3.js. (n.d.). D3.js - Data-Driven Documents. Retrieved from https://d3js.org/
+D3.js. (n.d.). 
+D3.js - Data-Driven Documents. Retrieved from https://d3js.org/
 
 Python Tools and Notebooks
 Jupyter Notebooks
 Project Jupyter. (n.d.). Jupyter Documentation. Retrieved from https://jupyter.org/
 
-Pandas
 Pandas. (n.d.). Pandas Documentation. Retrieved from https://pandas.pydata.org/
-
-General Data Visualization and GIS Resources
-Geospatial Data Visualization
-Esri. (n.d.). What is Geospatial Data Visualization? Retrieved from https://www.esri.com/en-us/what-is-gis/geospatial-data-visualization
 
 Data Visualization Best Practices
 Tableau. (n.d.). Data Visualization Best Practices. Retrieved from https://www.tableau.com/learn/articles/data-visualization-best-practices
